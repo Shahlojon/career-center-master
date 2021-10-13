@@ -1,0 +1,66 @@
+@model IEnumerable<CareerCenter.MVC.Models.FacultyView>
+
+@{
+    ViewData["Title"] = "Факультет";
+    Layout = "_LayoutAdmin";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create" asp-route-UniversityId="@ViewBag.UniversityId">Создать</a>
+</p>
+<table class="table table-bordered data-table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NameDekan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.University)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CretedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedAt)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameDekan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.University.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CretedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedAt)
+            </td>
+            <td>
+                <a class="ti-pencil action-link" asp-action="Edit" asp-route-id="@item.Id" asp-route-UniversityId="@item.UniversityId"></a> |
+                <a class="ti-search action-link" asp-action="Details" asp-route-id="@item.Id" asp-route-UniversityId="@item.UniversityId"></a> |
+                <a class="ti-close action-link" asp-action="Delete" asp-route-id="@item.Id" asp-route-UniversityId="@item.UniversityId"></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

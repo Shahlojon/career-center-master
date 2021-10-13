@@ -1,0 +1,145 @@
+@model CareerCenter.MVC.Models.UniversityView
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "_LayoutAdmin";
+}
+
+<h1>Create</h1>
+
+<h4>University</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form enctype="multipart/form-data" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FileUpload" class="control-label"></label>
+                <input type="file" asp-for="FileUpload" class="form-control dropify" data-allowed-file-extensions="png jpg jpeg" />
+                <span asp-validation-for="FileUpload" class="text-danger"></span>
+            </div>
+            <div name="Faculties" id="Faculties">
+                <div id="112205699" class="row mb-3">
+                    <div class="col-12">
+                        <div class="row d-flex mb-4 justify-content-end">
+                            <button data-parent-id="112205699" id="subFaculty" class="btn btn-outline-danger btn-apple"><i class="ti-trash"></i></button>
+                        </div>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="Title[]" asp-for="Faculties.First().Title" class="control-label"></label>
+                        <input name="Title[]" asp-for="Faculties.First().Title" class="form-control" />
+                        <span asp-validation-for="Faculties.First().Title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-6 ">
+                        <label for="nameDekan[]" asp-for="Faculties.First().NameDekan" class="control-label"></label>
+                        <input name="nameDekan[]" asp-for="Faculties.First().NameDekan" class="form-control" />
+                        <span asp-validation-for="Faculties.First().NameDekan" class="text-danger"></span>
+                    </div>
+
+
+                </div>
+                
+            </div>
+            <div class="row d-flex mb-4 justify-content-end">
+                <button id="addFaculty" class="btn btn-success btn-apple"><i class="ti-plus"></i></button>
+            </div>
+            
+            @*<div class="form-group">
+                <label asp-for="Faculty" class="control-label"></label>
+                <input asp-for="Faculty" class="form-control" />
+                <span asp-validation-for="Faculty" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Director" class="control-label"></label>
+                <input asp-for="Director" class="form-control" />
+                <span asp-validation-for="Director" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Adress" class="control-label"></label>
+                <input asp-for="Adress" class="form-control" />
+                <span asp-validation-for="Adress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateDateU" class="control-label"></label>
+                <input asp-for="CreateDateU" class="form-control" />
+                <span asp-validation-for="CreateDateU" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Site" class="control-label"></label>
+                <input asp-for="Site" class="form-control" />
+                <span asp-validation-for="Site" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CountStudent" class="control-label"></label>
+                <input asp-for="CountStudent" class="form-control" />
+                <span asp-validation-for="CountStudent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CountStudentGraduates" class="control-label"></label>
+                <input asp-for="CountStudentGraduates" class="form-control" />
+                <span asp-validation-for="CountStudentGraduates" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script>
+    $(document).on('click', '#addFaculty', function (e) {
+        e.preventDefault();
+        var id = Date.now(); 
+        $('#Faculties').append(`    
+                <div id="${id}"  class="row mb-3">
+                     <div class="col-12">
+                        <div class="row d-flex mb-4 justify-content-end">
+                            <button data-parent-id="${id}" id="subFaculty" class="btn btn-outline-danger btn-apple"><i class="ti-trash"></i></button>
+                        </div>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="Title[]"  class="control-label">Названия факултета</label>
+                        <input name="Title[]"  class="form-control" />
+                        <span  class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-6 ">
+                        <label for="nameDekan[]" class="control-label">Имя декана</label>
+                        <input name="nameDekan[]"  class="form-control" />
+                        <span class="text-danger"></span>
+                    </div>
+                </div>`);
+    });
+    $(document).on('click', '#subFaculty', function (r) {
+        r.preventDefault();
+        var id = $(this).attr('data-parent-id');
+        var element = $('#' + id);
+        element?.remove();
+    });
+</script>
+}

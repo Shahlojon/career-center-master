@@ -1,0 +1,12 @@
+/**
+ * @file
+ * Styles for Selective Tweets blocks.
+ */
+
+/**
+ * The blockquote gets replace by a tweet widget iframe using javascript. It
+ * flashes for a millisecond so we just hide it for esthetical reasons.
+ */
+.selective-tweets-content blockquote.twitter-tweet {
+  display: none;
+}

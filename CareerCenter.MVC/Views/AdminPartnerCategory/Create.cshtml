@@ -1,0 +1,56 @@
+@model CareerCenter.MVC.Models.PartnerCategoryView
+
+@{
+    ViewData["Title"] = "Создания";
+    Layout = "_LayoutAdmin";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h4>Категория партнеров</h4>
+<hr />
+<div class="row">
+    <div class="col-md-10">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group form-check">
+                <label class="form-check-label adomx-checkbox">
+                    <input class="form-check-input" type="checkbox" asp-for="IsActive">
+                    <i class="icon"></i>@Html.DisplayNameFor(model => model.IsActive)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DisplayName" class="control-label"></label>
+                <input asp-for="DisplayName" class="form-control" />
+                <span asp-validation-for="DisplayName" class="text-danger"></span>
+            </div>
+        
+            @*<div class="form-group">
+            <label asp-for="CretedAt" class="control-label"></label>
+            <input asp-for="CretedAt" class="form-control" />
+            <span asp-validation-for="CretedAt" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="UpdatedAt" class="control-label"></label>
+            <input asp-for="UpdatedAt" class="form-control" />
+            <span asp-validation-for="UpdatedAt" class="text-danger"></span>
+        </div>*@
+            <div class="form-group">
+                <input type="submit" value="Создать" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="button button-apple" asp-action="Index">Назад</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,62 @@
+@model IEnumerable<CareerCenter.MVC.Models.RegulationView>
+
+@{
+    ViewData["Title"] = "Список";
+    Layout = "_LayoutAdmin";
+}
+
+<h1>Все</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Создать</a>
+</p>
+<table class="table table-bordered data-table data-table-export">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryId)
+            </th>
+          
+            
+            <th>
+                @Html.DisplayNameFor(model => model.CretedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedAt)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>@{ var ctg = item.RegulationCategoryView?.Title;}
+                @Html.DisplayFor(modelItem => ctg)
+            </td> 
+            <td>
+                @Html.DisplayFor(modelItem => item.CretedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedAt)
+            </td>
+            <td>
+                <a  class="ti-pencil action-link" asp-action="Edit" asp-route-id="@item.Id"></a> |
+                <a class="ti-search action-link" asp-action="Details" asp-route-id="@item.Id"></a> |
+                <a class="ti-close action-link" asp-action="Delete" asp-route-id="@item.Id"></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

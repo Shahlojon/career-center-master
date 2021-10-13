@@ -1,0 +1,272 @@
+@model IEnumerable<UserView>
+@using CareerCenter.Core.Models
+@{
+    ViewData["Title"] = "Список";
+    Layout = "_LayoutAdmin";
+}
+
+<h1>Все</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Создать</a>
+</p>
+<table class="table table-bordered data-table data-table-export">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Role)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YearOfEnd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Position)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Birthday)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Inn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SpecialityCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Speciality)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MobilePhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HomePhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LevelOfEducation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FormOfEducation)
+            </th>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.Region)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BirthPlace)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nationality)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Qualification)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AcademicDegree)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Languages)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsDeptuies)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsAwarded)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsSectoralAwarded)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaritalStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Note)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BasisOfLearning)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreditQty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GroupCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DepartmentId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NormalizedUserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NormalizedEmail)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+           
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            @*@foreach(Role role in ViewBag.Roles)
+        {
+            if(role.Name == item.Role && item.Role!=null)
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => role.DisplayName)
+                </td>
+            }
+        }*@
+            <td>
+                @{ string ctg = item.UserRole?.DisplayName; }
+            @Html.DisplayFor(modelItem => ctg)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.YearOfEnd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bio)
+        </td>
+        <td>
+            <img width="200px" height="200px" src="~/uploads/@item.Image" alt="" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Position)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Birthday)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Inn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SpecialityCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Speciality)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MobilePhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HomePhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LevelOfEducation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FormOfEducation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Region)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BirthPlace)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nationality)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Qualification)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AcademicDegree)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Languages)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsDeptuies)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsAwarded)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsSectoralAwarded)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaritalStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Note)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BasisOfLearning)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreditQty)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GroupCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DepartmentId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NormalizedUserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NormalizedEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhoneNumber)
+        </td>
+
+        <td>
+            <a class="ti-pencil action-link" asp-action="Edit" asp-route-id="@item.Id"></a> |
+            <a class="ti-search action-link" asp-action="Details" asp-route-id="@item.Id"></a> |
+            <a class="ti-close action-link" asp-action="Delete" asp-route-id="@item.Id"></a>
+        </td>
+        </tr>
+}
+    </tbody>
+</table>

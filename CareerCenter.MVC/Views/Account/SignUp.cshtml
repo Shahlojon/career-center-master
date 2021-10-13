@@ -1,0 +1,50 @@
+@{
+    Layout = "_LogInLayout";
+}
+@model CareerCenter.MVC.Models.SignUpViewModel
+<div class="container">
+    <div class="col-8 offset-2">
+        <div class="card mt-3">
+            <div class="card-header">
+                Регистрация
+            </div>
+            <div class="card-body">
+                <form method="POST" asp-controller="Account" asp-action="SignUp">
+                    <div class="form-group row">
+                        <label for="UserName" class="col-sm-4 col-form-label text-right">Имя</label>
+                        <div class="col-sm-6">
+                            <input type="text"  required asp-for="UserName" class="form-control" id="UserName">
+                            <span asp-validation-for="UserName" class="text-danger small"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="UserEmail" class="col-sm-4 col-form-label text-right">E-Mail Адрес</label>
+                        <div class="col-sm-6">
+                            <input type="email" required name="Email" class="form-control" id="UserEmail" asp-for="Email">
+                            <span asp-validation-for="Email" class="text-danger small"></span>
+                        </div>                        
+                    </div>
+                    <div class="form-group row">
+                        <label for="UserPassword" class="col-sm-4 col-form-label text-right">Пароль</label>
+                        <div class="col-sm-6">
+                            <input type="password" required name="Password" class="form-control" id="UserPassword">
+                            <span asp-validation-for="Password" class="text-danger small"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="UserConfirmPassword" class="col-sm-4 col-form-label text-right">Подтвердить пароль</label>
+                        <div class="col-sm-6">
+                            <input type="password" required name="ConfirmPassword" class="form-control" id="UserConfirmPassword">
+                            <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="offset-4 col-sm-8">
+                        <button type="submit" class="btn btn-info mr-3">Зарегистрироваться</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

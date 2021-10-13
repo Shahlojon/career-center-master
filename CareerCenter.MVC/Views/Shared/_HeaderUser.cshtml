@@ -1,0 +1,48 @@
+﻿
+
+@if (User.Identity.IsAuthenticated)
+{
+    <!--User-->
+    @*<li class="adomx-dropdown col-auto">*@
+        <a class="toggle" href="#">
+            <span class="user">
+                <span class="avatar">
+                    @{ var photo = (!string.IsNullOrEmpty(ViewBag.User?.Image)) ? "~/uploads/" + ViewBag.User.Image : "~/images/default_user.png";}
+                    <img src="@photo" alt="">
+                    <span class="status"></span>
+                </span>
+                <span class="name">@ViewBag.User?.FullName</span>
+            </span>
+        </a>
+
+        <!-- Dropdown -->
+        <div class="adomx-dropdown-menu dropdown-menu-user">
+            <div class="head">
+                <h5 class="name"><a href="#">@ViewBag.User?.FullName</a></h5>
+                <a class="mail" href="#">@ViewBag.User?.Email</a>
+            </div>
+            <div class="body">
+                @*<ul>
+                    <li><a href="#"><i class="zmdi zmdi-account"></i>Profile</a></li>
+                    <li><a href="#"><i class="zmdi zmdi-email-open"></i>Inbox</a></li>
+                    <li><a href="#"><i class="zmdi zmdi-wallpaper"></i>Activity</a></li>
+                </ul>*@
+                <ul>
+                    @*<li><a href="#"><i class="zmdi zmdi-settings"></i>Setting</a></li>
+                    <li><a href="#"><i class="zmdi zmdi-lock-open"></i>Sing out</a></li>*@
+                    <li>
+                        <form id="logout" class="form-inline" action="/Account/LogOut" method="POST">
+                            @*<button type="submit" class="nav-link btn btn-link text-dark"></button>*@
+                            <a href="javascript:document.getElementById('logout').submit()"><i class="zmdi zmdi-lock-open"></i>Выход</a>
+                        </form>
+                    </li>
+                </ul>
+                @*<ul>
+                    <li><a href="#"><i class="zmdi zmdi-paypal"></i>Payment</a></li>
+                    <li><a href="#"><i class="zmdi zmdi-google-pages"></i>Invoice</a></li>
+                </ul>*@
+            </div>
+        </div>
+
+    @*</li>*@
+}
