@@ -181,5 +181,24 @@ namespace CareerCenter.MVC.Controllers
         {
             return _context.Partners.Any(e => e.Id == id);
         }
+
+        //[AllowAnonymous]
+        public async Task<IActionResult> ChangeActive(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var partner = await _context.Partners.FindAsync(id);
+            if (partner == null)
+            {
+                return NotFound();
+            }
+            partner.IsActive = !partner.IsActive;
+            _context.Update(partner);
+            _context.SaveChanges();
+            return Json(_mapper.Map<PartnerView>(partner));
+        }
     }
 }

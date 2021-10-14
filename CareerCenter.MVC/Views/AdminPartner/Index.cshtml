@@ -1,9 +1,7 @@
 @model IEnumerable<CareerCenter.MVC.Models.PartnerView>
 
-@{
-    ViewData["Title"] = "Список";
-    Layout = "_LayoutAdmin";
-}
+@{ ViewData["Title"] = "Список";
+                Layout = "_LayoutAdmin"; }
 
 <h1>Все</h1>
 
@@ -34,32 +32,58 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @*@Html.DisplayFor(modelItem => item.Logo)*@
-                <img width="200" height="200" src="~/uploads/@item.Logo" alt="Alternate Text" />
-            </td>
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>
+        @{ string ch = (item.IsActive) ? "checked=\"checked\"" : "";}
+        @*@Html.DisplayFor(modelItem => item.IsActive)*@        
+        <input data-id="@item.Id" @ch class="check-box" type="checkbox">
+    </td>
+    <td>
+    <td>
+        @{ string ctg = item.PartnerCategory?.Name; }
+        @Html.DisplayFor(modelItem => ctg)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Title)
+    </td>
+    <td>
+        @*@Html.DisplayFor(modelItem => item.Logo)*@
+        <img width="200" height="200" src="~/uploads/@item.Logo" alt="Alternate Text" />
+    </td>
 
 
-            <td>
-                @Html.DisplayFor(modelItem => item.CretedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdatedAt)
-            </td>
-            <td>
-                <a class="ti-pencil action-link" asp-action="Edit" asp-route-id="@item.Id"></a> |
-                <a class="ti-search action-link" asp-action="Details" asp-route-id="@item.Id"></a> |
-                <a class="ti-close action-link" asp-action="Delete" asp-route-id="@item.Id"></a>
-            </td>
-        </tr>
-}
+    <td>
+        @Html.DisplayFor(modelItem => item.CretedAt)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.UpdatedAt)
+    </td>
+    <td>
+        <a class="ti-pencil action-link" asp-action="Edit" asp-route-id="@item.Id"></a> |
+        <a class="ti-search action-link" asp-action="Details" asp-route-id="@item.Id"></a> |
+        <a class="ti-close action-link" asp-action="Delete" asp-route-id="@item.Id"></a>
+    </td>
+</tr>}
     </tbody>
 </table>
+@section Scripts {
+    <script>
+        $(document).on('click', 'input[type=checkbox]', function (e) {
+            var id = $(this).attr('data-id');
+            $.ajax({
+                url: "/AdminPartner/ChangeActive/"+id,
+                method: "GET",
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+
+            });
+
+        });
+    </script>
+}

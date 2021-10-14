@@ -159,5 +159,13 @@ namespace CareerCenter.MVC.Controllers
         {
             return _context.News.Any(e => e.Id == id);
         }
+
+        public ActionResult NewsSearch(string name)
+        {
+            var allnews = _context.News.Where(a => a.Title.Contains(name)).ToList();
+            return Json(allnews);
+        }
+
+       
     }
 }

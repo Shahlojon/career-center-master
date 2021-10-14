@@ -175,5 +175,8 @@ namespace CareerCenter.MVC.Controllers
         {
             return _context.Posts.Any(e => e.Id == id);
         }
+
+
+        
     }
 }
