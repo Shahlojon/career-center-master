@@ -131,7 +131,8 @@ namespace CareerCenter.MVC.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["UniversityId"] = new SelectList(_context.Universities, "Id", "Name", announcement.UniversityId);
-            ViewData["CategoryId"] = new SelectList(_context.AnnouncementCategories, "Id", "Title", announcement.CategoryId); return View(announcement);
+            ViewData["CategoryId"] = new SelectList(_context.AnnouncementCategories, "Id", "Title", announcement.CategoryId); 
+            return View(announcement);
         }
 
         // GET: AdminAnnouncement/Delete/5

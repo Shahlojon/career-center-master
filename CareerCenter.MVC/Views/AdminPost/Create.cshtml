@@ -21,30 +21,40 @@
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="CategoryId" class="control-label"></label>
-                <select asp-for="CategoryId" class="form-control select2">
-                    <option value="0">Не выбрано</option>
-                    @if (ViewBag.Categories != null)
-                    {
-                        @foreach (PostCategoryView item in ViewBag.Categories)
-                        {
-                            <option value="@item.Id">@item.Title</option>
-                        }
-                    }
-                </select>
-                <span asp-validation-for="CategoryId" class="text-danger"></span>
+                <label asp-for="UniversityId" class="control-label"></label>
+                <select asp-for="UniversityId" class="form-control" asp-items="ViewBag.UniversityId"></select>
+                <span asp-validation-for="UniversityId" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="PostCategoryId" class="control-label"></label>
+                <select asp-for="PostCategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+                <span asp-validation-for="PostCategoryId" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+            <label asp-for="CategoryId" class="control-label"></label>
+            <select asp-for="CategoryId" class="form-control select2">
+                <option value="0">Не выбрано</option>
+                @if (ViewBag.Categories != null)
+                {
+                    @foreach (PostCategoryView item in ViewBag.Categories)
+                    {
+                        <option value="@item.Id">@item.Title</option>
+                    }
+                }
+            </select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>*@
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
-            
-                <div class="form-group">
-                    <label asp-for="ImageFile" class="control-label"></label>
-                    <input type="file" asp-for="ImageFile" class="form-control dropify" data-allowed-file-extensions="png jpg jpeg" />
-                    <span asp-validation-for="ImageFile" class="text-danger"></span>
-                </div>
+
+            <div class="form-group">
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input type="file" asp-for="ImageFile" class="form-control dropify" data-allowed-file-extensions="png jpg jpeg" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Content" class="control-label"></label>
                 <textarea class="form-control summernote" asp-for="Content"></textarea>
@@ -56,10 +66,10 @@
                 <span asp-validation-for="IFile" class="text-danger"></span>
             </div>
             @*<div class="form-group">
-                <label asp-for="File" class="control-label"></label>
-                <input asp-for="File" class="form-control" />
-                <span asp-validation-for="File" class="text-danger"></span>
-            </div>*@
+            <label asp-for="File" class="control-label"></label>
+            <input asp-for="File" class="form-control" />
+            <span asp-validation-for="File" class="text-danger"></span>
+        </div>*@
 
             @*<div class="form-group">
             <label asp-for="CretedAt" class="control-label"></label>

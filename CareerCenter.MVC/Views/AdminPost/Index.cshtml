@@ -12,70 +12,48 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Image)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.IsActive)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CategoryId)
+                @Html.DisplayNameFor(model => model.PostCategoryId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Title)
             </th>
-
-            @* <th>
-                    @Html.DisplayNameFor(model => model.Content)
-                </th>*@
-            @* <th>
-                    @Html.DisplayNameFor(model => model.File)
-                </th>*@
-
             <th>
-                @Html.DisplayNameFor(model => model.CretedAt)
-            </th>
+                @Html.DisplayNameFor(model => model.University)
+            </th>           
             <th>
                 @Html.DisplayNameFor(model => model.UpdatedAt)
             </th>
-            <th></th>
+            <th>Действия</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
 <tr>
-    <td>
-        @*@Html.DisplayFor(modelItem => item.Image)*@
-        <img width="200px" height="200px" src="~/uploads/@item.Image" alt="" />
-    </td>
 
     <td>
         @{ string ch = item.IsActive ? "checked=\"checked\"" : ""; }
         @*@Html.DisplayFor(modelItem => item.IsActive)*@
         <input data-id="@item.Id" @ch checked="checked" class="check-box" type="checkbox">
     </td>
+   
     <td>
-    <td>
-        @{ string ctg = item.PostCategory?.Title; }
-        @Html.DisplayFor(modelItem => ctg)
+        @Html.DisplayFor(modelItem => item.PostCategory.Title)
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.Title)
     </td>
-
-    @* <td>
-            @Html.DisplayFor(modelItem => item.Content)
-        </td>*@
-    @*  <td>
-            @Html.DisplayFor(modelItem => item.File)
-        </td>*@
-
     <td>
-        @Html.DisplayFor(modelItem => item.CretedAt)
+        @Html.DisplayFor(modelItem => item.University.Name)
     </td>
+   
     <td>
         @Html.DisplayFor(modelItem => item.UpdatedAt)
     </td>
+
     <td>
         <a class="ti-pencil action-link" asp-action="Edit" asp-route-id="@item.Id"></a> |
         <a class="ti-search action-link" asp-action="Details" asp-route-id="@item.Id"></a> |

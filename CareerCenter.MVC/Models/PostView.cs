@@ -13,7 +13,7 @@ namespace CareerCenter.MVC.Models
     {
         [Required]
         [DisplayName("Категория")]
-        public int CategoryId { get; set; }
+        public int PostCategoryId { get; set; }
 
         [Required]
         [DisplayName("Заголовок")]
@@ -30,6 +30,8 @@ namespace CareerCenter.MVC.Models
         [DisplayName("Файл")]
         public string File { get; set; }
 
+        [DisplayName("Университет")]
+        public int UniversityId { get; set; }
 
         /// <summary>
         /// Нужна подумать так правильно или нет
@@ -42,5 +44,7 @@ namespace CareerCenter.MVC.Models
 
         public virtual PostCategoryView PostCategory { get; set; }
         public virtual IEnumerable<PostCommentView> PostComments { get; set; }
+        [DisplayName("Университет")]
+        public virtual UniversityView University { get; set; }
     }
 }

@@ -11,54 +11,60 @@
     <h4>Публикация</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CategoryId)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PostCategoryId)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             <span>@ViewBag.Categories.Title</span>
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Title)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Title)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.University)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.University.Name)
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Image)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             <img width="200" height="200" src="~/uploads/@Model.Image" alt="" />
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Content)
         </dt>
         <dd class="col-sm-10">
             @*@Html.DisplayFor(model => model.Content)*@
             @Html.Raw(Model.Content)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.File)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @*@Html.DisplayFor(model => model.File)*@
             <a target="_blank" download="@Model.File" href="/uploads/@Model.File">@Model.File</a>
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.IsActive)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IsActive)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.CretedAt)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CretedAt)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.UpdatedAt)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.UpdatedAt)
         </dd>
     </dl>

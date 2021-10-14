@@ -13,7 +13,7 @@ namespace CareerCenter.Core.Models
     public class Post:Base
     {
         [Required]
-        public int CategoryId { get; set; }
+        public int PostCategoryId { get; set; }
 
         [Required]
         public string Title { get; set; }

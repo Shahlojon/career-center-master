@@ -26,11 +26,16 @@ namespace CareerCenter.MVC.Controllers
         // GET: AdminPost
         public async Task<IActionResult> Index()
         {
-            var posts = await _context.Posts.ProjectTo<PostView>(_mapper.ConfigurationProvider).ToListAsync();
-            foreach(var post in posts)
-            {
-                post.PostCategory = _mapper.Map<PostCategoryView>(_context.PostCategories.Where(x => x.Id == post.CategoryId).FirstOrDefault());
-            }
+            //var posts = await _context.Posts.ProjectTo<PostView>(_mapper.ConfigurationProvider).ToListAsync();
+            //foreach(var post in posts)
+            //{
+            //    post.PostCategory = _mapper.Map<PostCategoryView>(_context.PostCategories.Where(x => x.Id == post.CategoryId).FirstOrDefault());
+            //} тут нужно было думаю написать категория а не пост категория 
+
+            //return View(posts);
+            var postsModel = await _context.Posts.Include(f => f.University).Include(f => f.PostCategory).ToListAsync();
+            var posts = await _context.Posts.Include(f => f.University).Include(f => f.PostCategory)
+                .ProjectTo<PostView>(_mapper.ConfigurationProvider).ToListAsync();
             return View(posts);
         }
 
@@ -43,21 +48,24 @@ namespace CareerCenter.MVC.Controllers
             }
 
             var post = await _context.Posts
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .Include(f => f.University).Include(f => f.PostCategory).FirstOrDefaultAsync(m => m.Id == id);
             if (post == null)
             {
                 return NotFound();
             }
-            ViewBag.Categories = await _context.PostCategories.Where(x => x.IsActive == true && x.Id==post.CategoryId)
-                .ProjectTo<PostCategoryView>(_mapper.ConfigurationProvider).FirstOrDefaultAsync();
+            //ViewBag.Categories = await _context.PostCategories.Where(x => x.IsActive == true && x.Id==post.CategoryId)
+            //    .ProjectTo<PostCategoryView>(_mapper.ConfigurationProvider).FirstOrDefaultAsync();
             return View(_mapper.Map<PostView>(post));
         }
 
         // GET: AdminPost/Create
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
-            ViewBag.Categories = await _context.PostCategories.Where(x => x.IsActive == true)
-                .ProjectTo<PostCategoryView>(_mapper.ConfigurationProvider).ToListAsync();
+            //ViewBag.Categories = await _context.PostCategories.Where(x => x.IsActive == true)
+            //    .ProjectTo<PostCategoryView>(_mapper.ConfigurationProvider).ToListAsync();
+            ViewData["UniversityId"] = new SelectList(_context.Universities, "Id", "Name");
+            var category = new SelectList(_context.PostCategories, "Id", "Title");
+            ViewData["CategoryId"] = category;
             return View();
         }
 
@@ -77,8 +85,10 @@ namespace CareerCenter.MVC.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.Categories = await _context.PostCategories.Where(x => x.IsActive == true)
-                .ProjectTo<PostCategoryView>(_mapper.ConfigurationProvider).ToListAsync();
+            //ViewBag.Categories = await _context.PostCategories.Where(x => x.IsActive == true)
+            //    .ProjectTo<PostCategoryView>(_mapper.ConfigurationProvider).ToListAsync();
+            ViewData["UniversityId"] = new SelectList(_context.Universities, "Id", "Name");
+            ViewData["CategoryId"] = new SelectList(_context.PostCategories, "Id", "Title");
             return View(postView);
         }
 
@@ -90,13 +100,15 @@ namespace CareerCenter.MVC.Controllers
                 return NotFound();
             }
 
-            var post = await _context.Posts.FindAsync(id);
+            var post = await _context.Posts.Include(f => f.University).Include(f => f.PostCategory).FirstOrDefaultAsync(x=>x.Id == id);
             if (post == null)
             {
                 return NotFound();
             }
-            ViewBag.Categories = await _context.PostCategories.Where(x => x.IsActive == true)
-                .ProjectTo<PostCategoryView>(_mapper.ConfigurationProvider).ToListAsync();
+            //ViewBag.Categories = await _context.PostCategories.Where(x => x.IsActive == true)
+            //    .ProjectTo<PostCategoryView>(_mapper.ConfigurationProvider).ToListAsync();
+            ViewData["UniversityId"] = new SelectList(_context.Universities, "Id", "Name");
+            ViewData["CategoryId"] = new SelectList(_context.PostCategories, "Id", "Title");
             return View(_mapper.Map<PostView>( post));
         }
 
@@ -136,6 +148,8 @@ namespace CareerCenter.MVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["UniversityId"] = new SelectList(_context.Universities, "Id", "Name");
+            ViewData["CategoryId"] = new SelectList(_context.PostCategories, "Id", "Title");
             return View(postView);
         }
 
@@ -148,13 +162,14 @@ namespace CareerCenter.MVC.Controllers
             }
 
             var post = await _context.Posts
+                .Include(f => f.University).Include(f => f.PostCategory)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (post == null)
             {
                 return NotFound();
             }
-            ViewBag.Categories = await _context.PostCategories.Where(x => x.IsActive == true && x.Id == post.CategoryId)
-                .ProjectTo<PostCategoryView>(_mapper.ConfigurationProvider).FirstOrDefaultAsync();
+            //ViewBag.Categories = await _context.PostCategories.Where(x => x.IsActive == true && x.Id == post.CategoryId)
+            //    .ProjectTo<PostCategoryView>(_mapper.ConfigurationProvider).FirstOrDefaultAsync();
             return View(_mapper.Map<PostView>(post));
         }
 

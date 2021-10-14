@@ -64,7 +64,8 @@
                                             <input type="password" required name="Password" class="form-control" id="StaffPassword" placeholder="Password">
                                             <span asp-validation-for="Password" class="text-danger small"></span>
                                         </div>
-                                        <div class="col-12 mb-20"><label for="remember" class="adomx-checkbox-2"><input id="remember" value="@Model.RememberMe" type="checkbox"><i class="icon"></i>Remember.</label></div>
+                                        <div class="col-12 mb-20"><label for="RememberMe" class="adomx-checkbox-2">
+                                            <input id="RememberMe" name="RememberMe" value="@Model.RememberMe" type="checkbox"><i class="icon"></i>Remember.</label></div>
                                         <div class="col-12">
                                             <div class="row justify-content-between">
                                                 <input type="hidden" name="ReturnUrl" value="@Context.Request.Query["ReturnUrl"]" />
@@ -103,5 +104,10 @@
     <script src="~/assets/js/plugins/tippy4.min.js.js"></script>
     <!--Main JS-->
     <script src="~/assets/js/main.js"></script>
+    <script>
+        $(document).on('change', 'input[name=RememberMe]', function (e) {
+            $(this).val($(this).is(':checked'));
+        });
+    </script>
 
 </body>
