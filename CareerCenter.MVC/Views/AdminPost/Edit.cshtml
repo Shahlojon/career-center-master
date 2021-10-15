@@ -29,26 +29,6 @@
                 <select asp-for="PostCategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
                 <span asp-validation-for="PostCategoryId" class="text-danger"></span>
             </div>
-            @*<div class="form-group">
-                <label asp-for="CategoryId" class="control-label"></label>
-                
-                <select asp-for="CategoryId" class="form-control select2">
-                    <option value="0">Не выбрано</option>
-                    @if (ViewBag.Categories != null) вроде работает ?
-                    {
-        @foreach (PostCategoryView category in ViewBag.Categories)
-        {
-        @if (Model.CategoryId == category.Id)
-        {
-        <option selected value="@category.Id">@category.Title</option>
- }
-    else
-    {
-        <option value="@category.Id">@category.Title</option>
-}}}
-                </select>
-                <span asp-validation-for="CategoryId" class="text-danger"></span>
-            </div>*@
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control" />
@@ -59,46 +39,20 @@
                 <input type="file" asp-for="ImageFile" class="form-control dropify" data-default-file="/uploads/@Model.Image" data-allowed-file-extensions="png jpg jpeg" />
                 <span asp-validation-for="ImageFile" class="text-danger"></span>
             </div>
-            
             <div class="form-group">
                 <label asp-for="IFile" class="control-label"></label>
                 <input type="file" asp-for="IFile" class="form-control dropify" data-default-file="/uploads/@Model.IFile" />
                 <span asp-validation-for="IFile" class="text-danger"></span>
             </div>
-            @*<div class="form-group">
-            <label asp-for="Image" class="control-label"></label>
-            <input asp-for="Image" class="form-control" />
-            <span asp-validation-for="Image" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Content" class="control-label"></label>
-            <input asp-for="Content" class="form-control" />
-            <span asp-validation-for="Content" class="text-danger"></span>
-        </div>*@
-            @*<div class="form-group">
-            <label asp-for="File" class="control-label"></label>
-            <input asp-for="File" class="form-control" />
-            <span asp-validation-for="File" class="text-danger"></span>
-        </div>*@
-            <input type="hidden" asp-for="Id" />
-            <input type="hidden" asp-for="Image" />
-            <input type="hidden" asp-for="CretedAt" />
 
-            @*<div class="form-group">
-            <label asp-for="CretedAt" class="control-label"></label>
-            <input asp-for="CretedAt" class="form-control" />
-            <span asp-validation-for="CretedAt" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="UpdatedAt" class="control-label"></label>
-            <input asp-for="UpdatedAt" class="form-control" />
-            <span asp-validation-for="UpdatedAt" class="text-danger"></span>
-        </div>*@
             <div class="form-group">
                 <label asp-for="Content" class="control-label"></label>
                 <textarea class="form-control summernote" asp-for="Content"></textarea>
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="Image" />
+            <input type="hidden" asp-for="CretedAt" />
             <div class="form-group">
                 <input type="submit" value="Сохранить" class="btn btn-primary" />
             </div>

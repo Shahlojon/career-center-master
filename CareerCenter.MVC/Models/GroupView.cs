@@ -20,5 +20,10 @@ namespace CareerCenter.MVC.Models
 
         [DisplayName("Выпуск кафедры")]
         public string GraduationDepartment { get; set; }//выпуск кафедры
+
+        [DisplayName("Факультет")]
+        public int FacultyId { get; set; }    
+    
+        public virtual FacultyView Faculty { get; set; }
     }
 }

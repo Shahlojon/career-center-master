@@ -17,6 +17,9 @@
                 @Html.DisplayNameFor(model => model.IsActive)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.FacultyId)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Code)
             </th>
             <th>
@@ -27,10 +30,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.GraduationDepartment)
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.CretedAt)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.UpdatedAt)
@@ -45,6 +44,9 @@
                 @Html.DisplayFor(modelItem => item.IsActive)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Faculty.Title)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Code)
             </td>
             <td>
@@ -57,9 +59,6 @@
                 @Html.DisplayFor(modelItem => item.GraduationDepartment)
             </td>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.CretedAt)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UpdatedAt)
             </td>

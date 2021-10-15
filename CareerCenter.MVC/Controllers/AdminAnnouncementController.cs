@@ -24,7 +24,7 @@ namespace CareerCenter.MVC.Controllers
         { }
 
 
-        // GET: AdminAnnouncement постав
+        // GET: AdminAnnouncement 
         public async Task<IActionResult> Index()
         {
             return View(await _context.Announcements.Include(f => f.University).Include(f=>f.Category)

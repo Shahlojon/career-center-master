@@ -26,7 +26,7 @@ namespace CareerCenter.MVC.Controllers
         // GET: AdminGroup
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Groups.ProjectTo<GroupView>(_mapper.ConfigurationProvider).ToListAsync());
+            return View(await _context.Groups.Include(f=>f.Faculty).ProjectTo<GroupView>(_mapper.ConfigurationProvider).ToListAsync());
         }
 
         // GET: AdminGroup/Details/5
@@ -37,7 +37,7 @@ namespace CareerCenter.MVC.Controllers
                 return NotFound();
             }
 
-            var @group = await _context.Groups
+            var @group = await _context.Groups.Include(x=>x.Faculty)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (@group == null)
             {
@@ -50,6 +50,8 @@ namespace CareerCenter.MVC.Controllers
         // GET: AdminGroup/Create
         public IActionResult Create()
         {
+
+            ViewData["FacultyId"] = new SelectList(_context.Faculties, "Id", "Title");
             return View();
         }
 
@@ -66,6 +68,8 @@ namespace CareerCenter.MVC.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewData["FacultyId"] = new SelectList(_context.Faculties, "Id", "Title", @group.FacultyId);
             return View(@group);
         }
 
@@ -77,11 +81,13 @@ namespace CareerCenter.MVC.Controllers
                 return NotFound();
             }
 
-            var @group = await _context.Groups.FindAsync(id);
+            var @group = await _context.Groups.Include(x => x.Faculty).FirstOrDefaultAsync(x=>x.Id==id);
             if (@group == null)
             {
                 return NotFound();
             }
+
+            ViewData["FacultyId"] = new SelectList(_context.Faculties, "Id", "Title", @group.FacultyId);
             return View(_mapper.Map<GroupView>(@group));
         }
 
@@ -117,6 +123,8 @@ namespace CareerCenter.MVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewData["FacultyId"] = new SelectList(_context.Faculties, "Id", "Title", @group.FacultyId);
             return View(@group);
         }
 
@@ -128,7 +136,7 @@ namespace CareerCenter.MVC.Controllers
                 return NotFound();
             }
 
-            var @group = await _context.Groups
+            var @group = await _context.Groups.Include(x => x.Faculty)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (@group == null)
             {
