@@ -1,4 +1,4 @@
-@model CareerCenter.MVC.Models.VacancyView
+﻿@model CareerCenter.MVC.Models.VacancyView
 
 @{
     ViewData["Title"] = "Create";
@@ -30,10 +30,11 @@
                     <option value="0">�� �������</option>
                     @if (ViewBag.Categories != null)
                     {
-        @foreach (VacancyCategoryView item in ViewBag.Categories)
-        {
-        <option value="@item.Id">@item.Title</option>
-}}
+                    @foreach (VacancyCategoryView item in ViewBag.Categories)
+                    {
+                                        <option value="@item.Id">@item.Title</option>
+                    }
+                    }
                 </select>
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
             </div>

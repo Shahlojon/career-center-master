@@ -24,8 +24,9 @@ namespace CareerCenter.MVC.Controllers
         { }
 
         // GET: AdminGroup
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? UniversityId)
         {
+            //var faculty = await _context.Faculties.Include(x => x.UniversityId == UniversityId).ToListAsync();
             return View(await _context.Groups.Include(f=>f.Faculty).ProjectTo<GroupView>(_mapper.ConfigurationProvider).ToListAsync());
         }
 
@@ -52,6 +53,7 @@ namespace CareerCenter.MVC.Controllers
         {
 
             ViewData["FacultyId"] = new SelectList(_context.Faculties, "Id", "Title");
+            ViewData["UniversityId"] = new SelectList(_context.Universities, "Id", "Name");
             return View();
         }
 
@@ -70,6 +72,7 @@ namespace CareerCenter.MVC.Controllers
             }
 
             ViewData["FacultyId"] = new SelectList(_context.Faculties, "Id", "Title", @group.FacultyId);
+            ViewData["UniversityId"] = new SelectList(_context.Universities, "Id", "Name");
             return View(@group);
         }
 
@@ -87,7 +90,9 @@ namespace CareerCenter.MVC.Controllers
                 return NotFound();
             }
 
-            ViewData["FacultyId"] = new SelectList(_context.Faculties, "Id", "Title", @group.FacultyId);
+            ViewData["UniversityId"] = new SelectList(_context.Universities, "Id", "Name", group.Faculty.UniversityId);
+
+            ViewData["FacultyId"] = new SelectList(_context.Faculties.Where(x=>x.UniversityId==group.Faculty.UniversityId).ToList(), "Id", "Title", @group.FacultyId);
             return View(_mapper.Map<GroupView>(@group));
         }
 
@@ -123,8 +128,10 @@ namespace CareerCenter.MVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["UniversityId"] = new SelectList(_context.Universities, "Id", "Name", group.Faculty.UniversityId);
 
-            ViewData["FacultyId"] = new SelectList(_context.Faculties, "Id", "Title", @group.FacultyId);
+            ViewData["FacultyId"] = new SelectList(_context.Faculties.Where(x => x.UniversityId == group.Faculty.UniversityId).ToList(), "Id", "Title", @group.FacultyId);
+
             return View(@group);
         }
 

@@ -20,10 +20,21 @@
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="FacultyId" class="control-label"></label>
-                <select asp-for="FacultyId" class="form-control" asp-items="ViewBag.FacultyId"></select>
-                <span asp-validation-for="FacultyId" class="text-danger"></span>
+                <label  class="control-label"></label>
+                <select onchange="updateFaculty(event)" class="form-control" asp-items="ViewBag.UniversityId">
+                    <option>Выберите университет</option>
+                </select>
+                <span class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="FacultyId" class="control-label"></label>
+                @*<select asp-for="FacultyId" class="form-control" asp-items="ViewBag.FacultyId">*@
+
+                    <select asp-for="FacultyId" class="form-control" >
+                       <option>Выберите факультет</option>
+                    </select>
+                    <span asp-validation-for="FacultyId" class="text-danger"></span>
+</div>
             <div class="form-group">
                 <label asp-for="Code" class="control-label"></label>
                 <input asp-for="Code" class="form-control" />
@@ -58,4 +69,33 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script>
+    function getParams(name, vals) {
+        params = '';
+        if (Array.isArray(vals)) {
+            vals.forEach(el => { params += `${name}=${el}&` });
+        } else {
+            vals = (vals) ? vals : "";
+            params += `${name}=${vals}&`
+        }
+        return params;
+    }
+    function updateFaculty(e) {
+        var values = $(e.target).val();
+        console.log(values);
+        var url = '/Dictionary/GetFaculty?' + getParams('id', values);
+        console.log(url);
+        $.get(url, function (data) {
+            console.log(data);
+            var select = $('[name=FacultyId]');
+            var selected = select?.val();
+            select.html("<option>Выберите факультет</option>");
+            $.each(data, function (id, option) {
+                select.append($("<option></option>").val(option.id).html(option.title));
+            });
+            select?.val(selected);
+            select?.trigger("change");            
+        });
+    }
+</script>
 }
