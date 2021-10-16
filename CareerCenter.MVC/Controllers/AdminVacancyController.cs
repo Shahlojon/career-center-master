@@ -24,11 +24,11 @@ namespace CareerCenter.MVC.Controllers
         // GET: AdminSettings
         public async Task<IActionResult> Index()
         {
-            var vacancies =await _context.Vacancies.ProjectTo<VacancyView>(_mapper.ConfigurationProvider).ToListAsync();
-            foreach (var vacancy in vacancies)
-            {
-                vacancy.Category = _mapper.Map<VacancyCategoryView>(_context.VacancyCategories.Where(x => x.Id == vacancy.CategoryId).FirstOrDefault());
-            }
+            var vacancies =await _context.Vacancies.Include(f => f.University).Include(f => f.Category).ProjectTo<VacancyView>(_mapper.ConfigurationProvider).ToListAsync();
+            //foreach (var vacancy in vacancies)
+            //{
+            //    vacancy.Category = _mapper.Map<VacancyCategoryView>(_context.VacancyCategories.Where(x => x.Id == vacancy.CategoryId).FirstOrDefault());
+            //}
             return View(vacancies);
         }
 
@@ -40,22 +40,24 @@ namespace CareerCenter.MVC.Controllers
                 return NotFound();
             }
 
-            var vacancy = _mapper.Map<VacancyView>(await _context.Vacancies
+            var vacancy = _mapper.Map<VacancyView>(await _context.Vacancies.Include(f => f.University).Include(f => f.Category)
                 .FirstOrDefaultAsync(m => m.Id == id));
             if (vacancy == null)
             {
                 return NotFound();
             }
-            vacancy.Category = await _context.VacancyCategories.Where(x => x.IsActive == true && x.Id == vacancy.CategoryId)
-                .ProjectTo<VacancyCategoryView>(_mapper.ConfigurationProvider).FirstOrDefaultAsync();
+            //vacancy.Category = await _context.VacancyCategories.Where(x => x.IsActive == true && x.Id == vacancy.CategoryId)
+            //    .ProjectTo<VacancyCategoryView>(_mapper.ConfigurationProvider).FirstOrDefaultAsync();
             return View(vacancy);
         }
 
         // GET: AdminSettings/Create
         public async Task<IActionResult> Create()
         {
-            ViewBag.Categories = await _context.VacancyCategories.Where(x => x.IsActive == true)
-              .ProjectTo<VacancyCategoryView>(_mapper.ConfigurationProvider).ToListAsync();
+            //ViewBag.Categories = await _context.VacancyCategories.Where(x => x.IsActive == true)
+            //  .ProjectTo<VacancyCategoryView>(_mapper.ConfigurationProvider).ToListAsync();
+            ViewData["UniversityId"] = new SelectList(_context.Universities, "Id", "Name");
+            ViewData["CategoryId"] = new SelectList(_context.VacancyCategories, "Id", "Title");
             return View();
         }
 
@@ -72,6 +74,8 @@ namespace CareerCenter.MVC.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["UniversityId"] = new SelectList(_context.Universities, "Id", "Name");
+            ViewData["CategoryId"] = new SelectList(_context.VacancyCategories, "Id", "Title");
             return View(vacancy);
         }
 
@@ -83,14 +87,14 @@ namespace CareerCenter.MVC.Controllers
                 return NotFound();
             }
 
-            var vacancy = await _context.Vacancies.FindAsync(id);
+            var vacancy = await _context.Vacancies.Include(f => f.University).Include(f => f.Category).FirstOrDefaultAsync(x=>x.Id == id);
             if (vacancy == null)
             {
                 return NotFound();
             }
-            ViewBag.Categories = await _context.VacancyCategories.Where(x => x.IsActive == true)
-                .ProjectTo<VacancyCategoryView>(_mapper.ConfigurationProvider).ToListAsync();
-            return View(_mapper.Map<Vacancy>(vacancy));
+            ViewData["UniversityId"] = new SelectList(_context.Universities, "Id", "Name", vacancy.UniversityId);
+            ViewData["CategoryId"] = new SelectList(_context.VacancyCategories, "Id", "Title", vacancy.CategoryId);
+            return View(_mapper.Map<VacancyView>(vacancy));
         }
 
         // POST: AdminSettings/Edit/5
@@ -125,6 +129,8 @@ namespace CareerCenter.MVC.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["UniversityId"] = new SelectList(_context.Universities, "Id", "Name", vacancy.UniversityId);
+            ViewData["CategoryId"] = new SelectList(_context.VacancyCategories, "Id", "Title", vacancy.CategoryId);
             return View(vacancy);
         }
 
@@ -136,16 +142,16 @@ namespace CareerCenter.MVC.Controllers
                 return NotFound();
             }
 
-            var vacancy = await _context.Vacancies
+            var vacancy = await _context.Vacancies.Include(f => f.University).Include(f => f.Category)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (vacancy == null)
             {
                 return NotFound();
             }
             var vacancyView = _mapper.Map<VacancyView>(vacancy);
-            vacancyView.Category = _mapper.Map<VacancyCategoryView>(
-                await _context.VacancyCategories.Where(x => x.IsActive == true && x.Id == vacancy.CategoryId)
-                .FirstOrDefaultAsync());
+            //vacancyView.Category = _mapper.Map<VacancyCategoryView>(
+            //    await _context.VacancyCategories.Where(x => x.IsActive == true && x.Id == vacancy.CategoryId)
+            //    .FirstOrDefaultAsync());
             return View(_mapper.Map<VacancyView>(vacancy));
         }
 

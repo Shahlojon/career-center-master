@@ -18,8 +18,13 @@ namespace CareerCenter.MVC.Models
         public string Description { get; set; }
         [DisplayName("Зарплата")]
         public string Salary { get; set; }
+        [DisplayName("Университет")]
+        public int UniversityId { get; set; }
         [DisplayName("Тип занятости")]
         public string TypeEmployment { get; set; }
         public virtual VacancyCategoryView Category { get; set; }
+        [DisplayName("Университет")]
+        public virtual UniversityView University { get; set; }
     }
+
 }

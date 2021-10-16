@@ -23,6 +23,9 @@
                 @Html.DisplayNameFor(model => model.Category.Title)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.University)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Salary)
             </th>
             <th>
@@ -47,12 +50,14 @@
                 @Html.DisplayFor(modelItem => item.Category.Title)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.University.Name)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Salary)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TypeEmployment)
             </td>
-            
             <td>
                 @Html.DisplayFor(modelItem => item.UpdatedAt)
             </td>
