@@ -99,6 +99,8 @@ namespace CareerCenter.MVC.Models
 		public int CreditQty { get; set; }// кол задолженностей
 		[DisplayName("Код группы")]
 		public int GroupCode { get; set; }      //код группы
+		[DisplayName("Статус")]
+		public bool IsSuccess { get; set; }
 
 		//Teacher
 		[DisplayName("Кафедра")]

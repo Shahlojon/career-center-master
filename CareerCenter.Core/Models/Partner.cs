@@ -17,6 +17,8 @@ namespace CareerCenter.Core.Models
 
         public string Logo { get; set; }
 
+        public bool IsConfirmed { get; set; }
+
         public string Description { get; set; }
         //...... 
 

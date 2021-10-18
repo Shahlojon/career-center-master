@@ -64,6 +64,8 @@ namespace CareerCenter.Core.Models
 		//Teacher
 		public int DepartmentId { get; set; }
 
+		public bool IsSuccess { get; set; }
+
 
 
 	}

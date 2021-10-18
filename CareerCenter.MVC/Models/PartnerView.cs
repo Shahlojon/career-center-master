@@ -25,7 +25,8 @@ namespace CareerCenter.MVC.Models
 
         [DisplayName("Описания")]
         public string Description { get; set; }
-
+        [DisplayName("Статус")]
+        public bool IsConfirmed { get; set; }
         [NotMapped]
         [DisplayName("Upload File")]
         public IFormFile FileUpload { get; set; }
