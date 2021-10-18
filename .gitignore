@@ -372,5 +372,9 @@ FodyWeavers.xsd
 *.epub
 *.mp3
 
+#djn nfr *.json
+
+
 */bin/
 */obj/
+appsettings.json
